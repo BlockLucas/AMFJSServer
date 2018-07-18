@@ -1,0 +1,20 @@
+{
+  "name": "amfjsserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --max-old-space-size=8192 server.js"
+  },
+  "author": "Lucas Block",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "amf-client-js": "1.8.0-SNAPSHOT.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
