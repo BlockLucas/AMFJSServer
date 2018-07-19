@@ -5,5 +5,5 @@ module.exports = function(app) {
     // Routes
     app.route('/parse').post(controller.parse);
     app.route('/validate').post(controller.validate);
-    app.route('/resolution').post(controller.resolution);
+    app.route('/resolve').post(controller.resolve);
 };

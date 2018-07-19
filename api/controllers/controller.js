@@ -31,7 +31,6 @@ exports.validate = function(req, res) {
     console.log("path = " + filePath);
     console.log("apiKind = " + apiKind);
 
-    console.log("Parsing...");
     parser.parse(apiKind, "file", filePath).then(
         function(unit) {
             console.log("Parse OK");
@@ -61,6 +60,28 @@ exports.validate = function(req, res) {
     )
 };
 
-exports.resolution = function(req, res) {
-    // TODO
+exports.resolve = function(req, res) {
+    var filePath = req.body.path;
+    var apiKind = req.body.apiKind;
+    console.log("path = " + filePath);
+    console.log("apiKind = " + apiKind);
+
+    parser.parse(apiKind, "file", filePath).then(
+        function(unit) {
+            console.log("Parse OK");
+            try {
+                resolver.resolve(apiKind, unit);
+                console.log("Resolution OK");
+                res.send("Resolution OK")
+            } catch(err) {
+                console.log("Resolution Error");
+                console.log(err);
+                res.send("Resolution Error")
+            }
+        },
+        function(exception) {
+            console.log("Parse Exception");
+            console.log(exception);
+        }
+    )
 };
