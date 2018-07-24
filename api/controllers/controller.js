@@ -36,19 +36,28 @@ exports.validate = function(req, res) {
             console.log("Parse OK");
             validator.validate(apiKind, unit).then(
                 function(report) {
-                    if (report.conforms) {
-                        console.log("Validation OK");
-                        console.log(report.toString());
-                        res.send("Validation OK")
-                    } else {
-                        console.log("Validation Error");
-                        console.log(report.toString());
-                        res.send("Validation not conform")
+                    console.log("Validation conforms = " + report.conforms);
+                    res.set('Content-Type', 'application/json');
+                    let reportJson = {
+                        conforms: report.conforms
+                    };
+                    reportJson["results"] = [];
+                    for (var i = 0, len = report.results.length; i < len; i++) {
+                        let r = report.results[i];
+                        let rj = {
+                            message: r.message,
+                            validationId: r.validationId,
+                            level: r.level,
+                            position: r.position.toString()
+                        };
+                        reportJson["results"].push(rj)
                     }
+                    res.send(JSON.stringify(reportJson, null, 2))
                 },
                 function(exception) {
                     console.log("Validation Exception");
                     console.log(exception);
+                    res.status(500);
                     res.send("Validation Error")
                 }
             )
