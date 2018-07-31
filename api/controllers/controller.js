@@ -48,6 +48,7 @@ exports.validate = function(req, res) {
                             message: r.message,
                             validationId: r.validationId,
                             level: r.level,
+                            location: r.location,
                             position: r.position.toString()
                         };
                         reportJson["results"].push(rj)
