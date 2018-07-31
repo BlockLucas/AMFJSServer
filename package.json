@@ -13,7 +13,7 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
-    "amf-client-js": "1.8.0-SNAPSHOT.0",
+    "amf-client-js": "snapshot",
     "body-parser": "^1.18.3",
     "express": "^4.16.3"
   }
