@@ -73,14 +73,16 @@ exports.validate = function(req, res) {
 exports.resolve = function(req, res) {
     var filePath = req.body.path;
     var apiKind = req.body.apiKind;
+    var resolutionPipeline = req.body.resolutionPipeline;
     console.log("path = " + filePath);
     console.log("apiKind = " + apiKind);
+    console.log("resolutionPipeline = " + resolutionPipeline);
 
     parser.parse(apiKind, "file", filePath).then(
         function(unit) {
             console.log("Parse OK");
             try {
-                resolver.resolve(apiKind, unit);
+                resolver.resolve(apiKind, unit, resolutionPipeline);
                 console.log("Resolution OK");
                 res.send("Resolution OK")
             } catch(err) {

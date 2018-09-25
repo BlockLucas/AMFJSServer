@@ -10,9 +10,9 @@ app.listen(port);
 var routes = require('./api/routes/routes');
 routes(app);
 
-var amf = require('amf-client-js')
+var amf = require('amf-client-js');
 amf.AMF.init().then ( function () {
     console.log("AMF.init completed");
-})
+});
 
 console.log('AMF JS server started, port: ' + port);
