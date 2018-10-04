@@ -1,17 +1,14 @@
-var express = require('express'),
-    port = process.env.PORT || 3000;
+import {AMF} from 'amf-client-js';
+import express from 'express';
+const port = process.env.PORT || 3000;
+import routes from './api/routes/routes';
 
-var app = express();
-
+const app = express();
 app.use(express.json());
-
 app.listen(port);
-
-var routes = require('./api/routes/routes');
 routes(app);
 
-var amf = require('amf-client-js');
-amf.AMF.init().then ( function () {
+AMF.init().then(function () {
     console.log("AMF.init completed");
 });
 

@@ -1,9 +1,7 @@
-'use strict';
-module.exports = function(app) {
-    var amfController = require('../controllers/amf/amfController');
+import amfController from '../controllers/amf/controller'
 
-    // Routes
-    app.route('/amf/parse').post(amfController.parse);
-    app.route('/amf/validate').post(amfController.validate);
-    app.route('/amf/resolve').post(amfController.resolve);
-};
+export default function routes(app) {
+    app.route('/amf/parse').post(_ => amfController.parse);
+    app.route('/amf/validate').post(_ => Validator.validate);
+    app.route('/amf/resolve').post(_ => amfController.resolve);
+}

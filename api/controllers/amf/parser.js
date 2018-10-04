@@ -1,33 +1,31 @@
-var amf = require('amf-client-js');
+import {AMF} from 'amf-client-js';
 
-var parser = {
-    parse: function (apiKind, mode, content) {
+export default class Parser {
+    static parse(apiKind, mode, content) {
         if (mode === 'text') {
             return this.parseString(apiKind, content)
         } else {
             return this.parseFile(apiKind, content)
         }
-    },
+    };
 
-    parseFile: function (apiKind, url) {
+    static parseFile(apiKind, url) {
         console.log("Parsing file...");
-        var parser = this.getParser(apiKind);
+        const parser = Parser.getParser(apiKind);
         return parser.parseFileAsync(url)
-    },
+    };
 
-    parseString: function (apiKind, api) {
+    static parseString(apiKind, api) {
         console.log("Parsing string...");
-        var parser = this.getParser(apiKind);
+        const parser = Parser.getParser(apiKind);
         return parser.parseStringAsync(api)
-    },
+    };
 
-    getParser: function (apiKind) {
+    static getParser(apiKind) {
         console.log(apiKind);
-        if (apiKind === "RAML 1.0") return amf.Core.parser("RAML 1.0", "application/yaml");
-        if (apiKind === "RAML 0.8") return amf.Core.parser("RAML 0.8", "application/yaml");
-        if (apiKind === "OAS 2.0") return  amf.Core.parser("OAS 2.0", "application/json");
-        return amf.Core.parser("AMF Graph", "application/ld+json")
+        if (apiKind === "RAML 1.0") return AMF.Core.parser("RAML 1.0", "application/yaml");
+        if (apiKind === "RAML 0.8") return AMF.Core.parser("RAML 0.8", "application/yaml");
+        if (apiKind === "OAS 2.0") return AMF.Core.parser("OAS 2.0", "application/json");
+        return AMF.Core.parser("AMF Graph", "application/ld+json")
     }
 };
-
-exports.parser = parser;
